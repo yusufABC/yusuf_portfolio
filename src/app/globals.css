@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --neon-blue: #00d4ff;
+  --neon-purple: #b400ff;
+  --neon-cyan: #00ffff;
+  --bg-dark: #0a0a0f;
+  --card-dark: #12121a;
+  --border-dark: #1e1e2e;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  overflow-x: hidden;
+}
+
+/* Dark theme defaults */
+.dark body {
+  background-color: var(--bg-dark);
+  color: #e2e8f0;
+}
+
+/* Light theme */
+.light body,
+body:not(.dark) {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+/* Glassmorphism base */
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl;
+  }
+
+  .glass-card-light {
+    @apply backdrop-blur-md bg-white/80 border border-white/60 rounded-2xl shadow-lg;
+  }
+
+  .neon-text {
+    background: linear-gradient(135deg, #00d4ff 0%, #b400ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .neon-border {
+    border: 1px solid transparent;
+    background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+      linear-gradient(135deg, #00d4ff, #b400ff) border-box;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(180, 0, 255, 0.2);
+  }
+
+  .neon-glow-hover:hover {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5), 0 0 60px rgba(180, 0, 255, 0.4);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .btn-primary {
+    @apply px-8 py-3 rounded-full font-semibold text-white transition-all duration-300;
+    background: linear-gradient(135deg, #00d4ff 0%, #b400ff 100%);
+  }
+
+  .btn-primary:hover {
+    @apply scale-105;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5), 0 0 60px rgba(180, 0, 255, 0.4);
+  }
+
+  .btn-outline {
+    @apply px-8 py-3 rounded-full font-semibold transition-all duration-300;
+    border: 1px solid transparent;
+    background: transparent padding-box,
+      linear-gradient(135deg, #00d4ff, #b400ff) border-box;
+    color: #00d4ff;
+  }
+
+  .btn-outline:hover {
+    @apply scale-105;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(180, 0, 255, 0.1)) padding-box,
+      linear-gradient(135deg, #00d4ff, #b400ff) border-box;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d4ff, #b400ff);
+  border-radius: 3px;
+}
+
+/* Animated background particles */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Section transitions */
+section {
+  position: relative;
+}
+
+/* Gradient orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.orb-blue {
+  background: radial-gradient(circle, #00d4ff, transparent);
+}
+
+.orb-purple {
+  background: radial-gradient(circle, #b400ff, transparent);
+}
+
+/* 3D Canvas container */
+#three-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Light theme overrides */
+html.light {
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+html.light .glass-card {
+  @apply backdrop-blur-md bg-white/80 border border-gray-200 shadow-lg rounded-2xl;
+}
+
+html.light .neon-border {
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, #00d4ff, #b400ff) border-box;
+}
+
+/* Lenis smooth scroll */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
